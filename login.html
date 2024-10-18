@@ -59,6 +59,17 @@
             font-size: 18px;
             cursor: pointer; /* Curseur de la souris en mode "pointer" */
         }
+
+
+                /* Style pour l'image de l'œil */
+        #eye {
+            position: absolute;
+            right: 510px;
+            top: 320px ;
+            transform: translateY(-50%);
+            width: 75px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -67,9 +78,21 @@
             <!-- Champ pour entrer le nom d'utilisateur -->
             <input type="text" placeholder="Nom du PC"><br>
             <!-- Champ pour entrer le mot de passe -->
-            <input type="password" placeholder="Mot de passe cession"><br>
+            <input type="password" id = "pass" placeholder="Mot de passe cession"><br>
+            <img src="/Design sans titre.png" id="eye" alt="Image oeil barré" onClick="changer()"/>
             <!-- Lien pour récupérer le mot de passe -->
             <button type="submit" class="login-button">Connexion</button>
+            <script>
+                function changer() {
+                    var motDePasse = document.getElementById("pass");
+                    if (motDePasse.type === "password") {
+                        motDePasse.type = "text";
+                    } else {
+                        motDePasse.type = "password";
+                    }
+                }
+            </script>
+           
         </form>
     </div>
 </body>
