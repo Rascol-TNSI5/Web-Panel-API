@@ -13,6 +13,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh; /* Pleine hauteur de l'écran */
+            margin: 0;
         }
 
         /* Conteneur du formulaire de connexion */
@@ -20,7 +21,30 @@
             text-align: center;
             background-color: black;
             color: white;
+            border: 2px solid #A667C1; /* Bordure légèrement violette */
+            border-radius: 20px; /* Bordure arrondie */
+            padding: 30px; /* Espacement autour du contenu */
+            width: 400px; /* Largeur du conteneur */
+            position: relative;
         }
+
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            background-color: #A667C1; 
+            border-radius: 50%; 
+            margin: -80px auto 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #profile-img{
+            width: 200px; 
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+        }   
 
         /* Styles pour les champs de texte et de mot de passe */
         input[type="text"], input[type="password"] {
@@ -32,11 +56,6 @@
             background-color: black; /* Fond noir */
             color: white; /* Texte en blanc */
             font-size: 16px;
-        }
-
-        /* Styles pour les placeholders (textes indicatifs) */
-        input[type="text"]::placeholder, input[type="password"]::placeholder {
-            color: #A667C1; /* Placeholder en violet */
         }
 
         /* Style pour le lien "Mot de passe oublié ?" */
@@ -60,28 +79,32 @@
             cursor: pointer; /* Curseur de la souris en mode "pointer" */
         }
 
-
-                /* Style pour l'image de l'œil */
+   
         #eye {
             position: absolute;
-            right: 510px;
-            top: 320px ;
-            transform: translateY(-50%);
-            width: 75px;
+            right: 55px;
+            top: 135px;
+            width: 100px;
+            height: 100px;
             cursor: pointer;
         }
     </style>
 </head>
 <body>
     <div class="login-container">
+        <!-- Espace pour l'image de profil -->
+        <div class="profile-pic">
+            <img src="/photo-profil2.png" alt="Profil" id="profile-img">
+        </div>
         <form>
             <!-- Champ pour entrer le nom d'utilisateur -->
             <input type="text" placeholder="Nom du PC"><br>
             <!-- Champ pour entrer le mot de passe -->
-            <input type="password" id = "pass" placeholder="Mot de passe cession"><br>
+            <input type="password" id="pass" placeholder="Mot de passe cession"><br>
             <img src="/oeil-barré.png" id="eye" alt="Image oeil barré" onClick="changer()"/>
             <!-- Lien pour récupérer le mot de passe -->
             <button type="submit" class="login-button">Connexion</button>
+
             <script>
                 function changer() {
                     var motDePasse = document.getElementById("pass");
@@ -92,7 +115,6 @@
                     }
                 }
             </script>
-           
         </form>
     </div>
 </body>
