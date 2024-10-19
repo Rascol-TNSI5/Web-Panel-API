@@ -19,7 +19,7 @@ body {
 
 header {
 	background-color: var(--purple);
-	padding: 1rem;
+	padding: 0;
 	text-align: center;
 }
 
@@ -27,7 +27,7 @@ nav ul {
 	list-style-type: none;
 	padding: 0;
 	display: flex;
-	justify-content: center;
+	justify-content: left;
 	background-color: var(--light-gray);
 	margin: 0;
 }
@@ -63,7 +63,7 @@ section.active {
 footer {
 	background-color: var(--purple);
 	text-align: center;
-	padding: 1rem;
+	padding: 0;
 	width: 100%;
 	box-sizing: border-box;
 }

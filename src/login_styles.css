@@ -7,7 +7,7 @@ body {
 	height: 100vh; /* Pleine hauteur de l'écran */
 	margin: 0;
 
-	background-image: url("/src/cdn/background.jpg");
+	background-image: url("/src/content/background.jpg");
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
