@@ -1,0 +1,98 @@
+/* Styles de base pour le corps de la page */
+body {
+	font-family: Arial, sans-serif;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh; /* Pleine hauteur de l'écran */
+	margin: 0;
+
+	background-image: url("/src/cdn/background.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+body::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7); /* Couleur de fond avec transparence */
+	z-index: -1; /* Place le pseudo-élément derrière le contenu */
+}
+
+/* Conteneur du formulaire de connexion */
+.login-container {
+	text-align: center;
+	background-color: black;
+	color: white;
+	border: 2px solid #a667c1; /* Bordure légèrement violette */
+	border-radius: 20px; /* Bordure arrondie */
+	padding: 30px; /* Espacement autour du contenu */
+	width: 400px; /* Largeur du conteneur */
+	position: relative;
+}
+
+.profile-pic {
+	width: 100px;
+	height: 100px;
+	background-color: #a667c1;
+	border-radius: 50%;
+	margin: -80px auto 20px auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#profile-img {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+/* Styles pour les champs de texte et de mot de passe */
+input[type="text"],
+input[type="password"] {
+	width: 300px; /* Largeur des champs */
+	padding: 15px; /* Espacement interne */
+	margin: 10px 0;
+	border: 2px solid #a667c1; /* Bordure violette */
+	border-radius: 30px; /* Bordures arrondies */
+	background-color: black; /* Fond noir */
+	color: white; /* Texte en blanc */
+	font-size: 16px;
+}
+
+/* Style pour le lien "Mot de passe oublié ?" */
+.forgot-password {
+	display: block;
+	margin: 15px 0;
+	color: #a667c1; /* Couleur violette */
+	text-decoration: none; /* Pas de soulignement */
+}
+
+/* Bouton de connexion */
+.login-button {
+	width: 320px; /* Largeur du bouton */
+	padding: 15px; /* Espacement interne */
+	margin: 20px 0;
+	border: none;
+	border-radius: 30px; /* Bouton arrondi */
+	background-color: #a667c1; /* Fond violet */
+	color: white; /* Texte en blanc */
+	font-size: 18px;
+	cursor: pointer; /* Curseur de la souris en mode "pointer" */
+}
+
+#eye {
+	position: absolute;
+	right: 55px;
+	top: 145px;
+	width: 80px;
+	height: 80px;
+	cursor: pointer;
+}

@@ -1,0 +1,113 @@
+:root {
+	--dark-blue: #9b5dac; /* Remplacé par purple */
+	--purple: #181138; /* Remplacé par dark-blue */
+	--bright-purple: #b0b0b0; /* Remplacé par light-gray */
+	--light-gray: #b021c2; /* Remplacé par bright-purple */
+	--off-white: #eaeaea;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: var(--dark-blue);
+	color: #fff;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+header {
+	background-color: var(--purple);
+	padding: 1rem;
+	text-align: center;
+}
+
+nav ul {
+	list-style-type: none;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	background-color: var(--light-gray);
+	margin: 0;
+}
+
+nav ul li {
+	margin: 0 15px;
+}
+
+nav a {
+	color: #fff;
+	text-decoration: none;
+	padding: 1rem;
+	display: block;
+}
+
+nav a:hover {
+	background-color: var(--bright-purple);
+}
+
+main {
+	flex: 1;
+	padding: 2rem;
+}
+
+section {
+	display: none;
+}
+
+section.active {
+	display: block;
+}
+
+footer {
+	background-color: var(--purple);
+	text-align: center;
+	padding: 1rem;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	max-width: 300px;
+	margin: 0 auto;
+}
+
+form label,
+form input,
+form button {
+	margin-bottom: 1rem;
+	color: #fff;
+}
+
+form input,
+form button {
+	padding: 0.5rem;
+	border-radius: 5px;
+	border: 1px solid var(--bright-purple);
+	background-color: var(--purple);
+}
+
+form input {
+	color: #fff;
+}
+
+form button {
+	background-color: var(--light-gray);
+	border: none;
+	cursor: pointer;
+}
+
+form button:hover {
+	background-color: var(--bright-purple);
+}
+
+a {
+	color: #fff;
+}
+
+a:hover {
+	color: var(--bright-purple);
+}
