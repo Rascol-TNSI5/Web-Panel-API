@@ -7,3 +7,8 @@
 		<title>Mon Site Web</title>
 		<link rel="stylesheet" href="Styles_Dashboard.css" />
 	</head>
+
+	if utilisateur connecté 
+		va sur la page Dashboard
+	else
+		print(autorisation incomplète)
