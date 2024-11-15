@@ -1,0 +1,1 @@
+uid: 7428, computer_name:DESKTOP-1NN69N4, username:fl-studio, architecture:AMD64, windows_version:Windows 10.0.19045
