@@ -1,10 +1,9 @@
-/* Styles de base pour le corps de la page */
 body {
 	font-family: Arial, sans-serif;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 100vh; /* Pleine hauteur de l'écran */
+	height: 100vh; 
 	margin: 0;
 
 	background-image: url("/src/content/background.jpg");
