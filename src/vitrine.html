@@ -15,13 +15,14 @@
 			<ul>
 				<li><a href="#" onclick="showSection('home')">Accueil</a></li>
 				<li><a href="#" onclick="showSection('about')">Informations</a></li>
+				<li><a href="Dashboard.php">Dashboard</a></li> 
 				<li><a href="login.php">Connexion</a></li>
 			</ul>
 		</nav>
 
 		<main>
 			<section id="home" class="active">
-				<h2>Accueil</h2>
+				<h2 id="test">Accueil</h2>
 				<p>Ceci est la page d'accueil de notre site.</p>
 				<img src="/src/content/background1.jpg" alt="Image d'accueil" style="width: 100%; max-width: 600px" />
 			</section>
@@ -39,13 +40,11 @@
 
 		<script>
 			function showSection(sectionId) {
-				// Cache toutes les sections
 				const sections = document.querySelectorAll("section");
 				sections.forEach((section) => {
 					section.classList.remove("active");
 				});
 
-				// Affiche la section sélectionnée
 				document.getElementById(sectionId).classList.add("active");
 			}
 		</script>
