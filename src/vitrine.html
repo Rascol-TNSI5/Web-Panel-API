@@ -15,8 +15,7 @@
 			<ul>
 				<li><a href="#" onclick="showSection('home')">Accueil</a></li>
 				<li><a href="#" onclick="showSection('about')">Informations</a></li>
-				<li><a href="#" onclick="showSection('dashbord')">Dashboard</a></li>
-				<li></li><a href="Dashboard.html">
+				<li><a href="Dashboard.html">Dashboard</a></li> 
 				<li><a href="login.php">Connexion</a></li>
 			</ul>
 		</nav>
@@ -41,13 +40,11 @@
 
 		<script>
 			function showSection(sectionId) {
-				// Cache toutes les sections
 				const sections = document.querySelectorAll("section");
 				sections.forEach((section) => {
 					section.classList.remove("active");
 				});
 
-				// Affiche la section sélectionnée
 				document.getElementById(sectionId).classList.add("active");
 			}
 		</script>
