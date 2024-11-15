@@ -1,4 +1,5 @@
 <?php
+include "../db.php";
 // Vérifie si la requête est une méthode POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupère le contenu de la requête
@@ -10,17 +11,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Vérifie si le champ client_id existe dans les données
     if (isset($data['uid']) && isset($data['computer_name'])) {
         // Récupère le client_id
+ 
         $client_uid = $data['uid'];
-        $computer_name = $data['computer_name']
-        $username = $data['username']
-        $architecture = $data['architecture']
-        $windows_version = $data['windows_version']
+        $computer_name = $data['computer_name'];
+        $username = $data['username'];
+        $architecture = $data['architecture'];
+        $windows_version = $data['windows_version'];
         
-        // Prépare le contenu à écrire dans le fichier
-        $log_entry = "uid: " . $client_id . "," . " computer_name:" . $computer_name ;
-
-        // Chemin vers le fichier texte où nous allons enregistrer les données
-        $file_path = 'clients.txt';
+        $sql = "INSERT INTO client_data(uid, computer_name, username, architecture , windows_version) VALUES (" . $client_uid . ",'" . $computer_name . "','" . $username . "','" . $architecture . "','" . $windows_version . "')";
+        mysqli_query($conn, $sql);
 
         // Écrit le contenu dans le fichier
         file_put_contents($file_path, $log_entry, FILE_APPEND | LOCK_EX);
