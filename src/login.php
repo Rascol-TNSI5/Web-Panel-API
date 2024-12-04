@@ -5,6 +5,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Formulaire de Connexion</title>
 		<link rel="stylesheet" href="login_styles.css" />
+		<link rel="icon" href="/src/content/favicon.ico" type="image/x-icon" /> <!-- Ligne ajoutée pour le favicon -->
+
 	</head>
 	<body>
 		<div class="login-container">
