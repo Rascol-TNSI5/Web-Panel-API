@@ -17,11 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         $sql = "INSERT INTO client_data(uid, computer_name, username, architecture , windows_version) VALUES (" . $client_uid . ",'" . $computer_name . "','" . $username . "','" . $architecture . "','" . $windows_version . "')";
         mysqli_query($conn, $sql);
-
-        // Écrit le contenu dans le fichier
-        file_put_contents($file_path, $log_entry, FILE_APPEND | LOCK_EX);
         
-
         header('HTTP/1.1 200 OK');
         echo json_encode(['status' => 'success', 'client_id' => $client_id]);
     } else {
