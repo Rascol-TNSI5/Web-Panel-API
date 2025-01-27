@@ -144,7 +144,7 @@
                                               <i class="bx bx-dots-vertical-rounded"></i>
                                           </button>
                                           <div class="dropdown-menu">
-                                              <a class="dropdown-item" href="http://localhost/src/template/html/computer.php?uid='  . htmlspecialchars($row['uid']) . '"><box-icon name="info-circle"></box-icon></i> View</a>
+                                              <a class="dropdown-item" href="http://195.15.243.173/template/html/computer.php?uid='  . htmlspecialchars($row['uid']) . '"><box-icon name="info-circle"></box-icon></i> View</a>
                                           </div>
                                       </div>
                                   </td>';

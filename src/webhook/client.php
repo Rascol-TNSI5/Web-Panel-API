@@ -14,9 +14,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $username = $data['username'];
         $architecture = $data['architecture'];
         $windows_version = $data['windows_version'];
-        
-        $sql = "INSERT INTO client_data(uid, computer_name, username, architecture , windows_version) VALUES (" . $client_uid . ",'" . $computer_name . "','" . $username . "','" . $architecture . "','" . $windows_version . "')";
-        mysqli_query($conn, $sql);
+
+        $sql = "SELECT * FROM client_data WHERE uid = " . $client_uid;
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+        if ($row) {
+            $sql = "UPDATE client_data SET computer_name = '" . $computer_name . "', username = '" . $username . "', architecture = '" . $architecture . "', windows_version = '" . $windows_version . "' WHERE uid = " . $client_uid;
+            mysqli_query($conn, $sql);
+            $client_id = $row['id'];
+        } else {
+            $sql = "INSERT INTO client_data(uid, computer_name, username, architecture , windows_version) VALUES (" . $client_uid . ",'" . $computer_name . "','" . $username . "','" . $architecture . "','" . $windows_version . "')";
+            mysqli_query($conn, $sql);
+            $client_id = mysqli_insert_id($conn);
+        }
         
         header('HTTP/1.1 200 OK');
         echo json_encode(['status' => 'success', 'client_id' => $client_id]);
