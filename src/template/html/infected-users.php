@@ -44,7 +44,6 @@
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-home-smile"></i>
                 <div class="text-truncate" data-i18n="Dashboards">Dashboards</div>
-                <span class="badge rounded-pill bg-danger ms-auto">5</span>
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
@@ -128,7 +127,7 @@
                       include "./db.php";  // Connexion à la base de données
 
                       // Requête SQL pour récupérer toutes les données
-                      $sql = "SELECT * FROM client_data";
+                      $sql = "SELECT DISTINCT * FROM client_data";
                       $result = mysqli_query($conn, $sql);
 
                       if (mysqli_num_rows($result) > 0) {
