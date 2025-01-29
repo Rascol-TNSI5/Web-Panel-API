@@ -124,7 +124,7 @@
                     </thead>
                     <tbody class="table-border-bottom-0">
                       <?php
-                      include "./db.php";  // Connexion à la base de données
+                      include "../../db.php";  // Connexion à la base de données
 
                       // Requête SQL pour récupérer toutes les données
                       $sql = "SELECT DISTINCT * FROM client_data";

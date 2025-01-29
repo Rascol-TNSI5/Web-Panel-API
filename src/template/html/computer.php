@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Connexion à la base de données
-include "db.php";
+include "../../db.php";
 
 // Vérifier si l'UID est présent dans l'URL
 $uid = isset($_GET['uid']) ? $_GET['uid'] : null;
